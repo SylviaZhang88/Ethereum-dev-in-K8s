@@ -1,0 +1,1 @@
+docker build -t node:8.11.1 .

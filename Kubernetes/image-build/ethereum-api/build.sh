@@ -1,0 +1,1 @@
+docker build -t ethereum-api:0.1 .
