@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ethereum-cm
+  namespace: ethereum
+data:
+  WS: "ws://192.168.0.150:8546"
+  MONGODB: "mongodb://192.168.0.150:27017/ethtree"

@@ -1,0 +1,38 @@
+apiVersion: apps/v1 
+kind: StatefulSet 
+metadata:
+  namespace: ethereum
+  name: ethereum-api
+  labels:
+    name: ethereum-api
+spec:
+  selector:
+    matchLabels:
+      app: ethereum-api
+  serviceName: ethereum-api
+  replicas: 2 
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        app: ethereum-api
+    spec:
+      containers:
+      - name: ethereum-api
+        image: hollycat/ethereum-api:latest 
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        env:
+        - name: WS
+          valueFrom: 
+             configMapKeyRef: 
+               name: ethereum-cm
+               key: WS
+        - name: MONGODB
+          valueFrom:
+             configMapKeyRef:
+               name: ethereum-cm
+               key: MONGODB
